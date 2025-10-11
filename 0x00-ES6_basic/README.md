@@ -20,3 +20,6 @@ Use rest parameter to make a variadic function
 
 ### [5-spread-operator.js](./5-spread-operator.js)
 Use spread operator to concatenate arrays and strings
+
+### [6-string-interpolation.js](./6-string-interpolation.js)
+Use template literals to form strings. A bit similar to fstring in python. You'll find this behaviour in the return value of the function
