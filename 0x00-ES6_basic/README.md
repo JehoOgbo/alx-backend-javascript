@@ -22,4 +22,9 @@ Use rest parameter to make a variadic function
 Use spread operator to concatenate arrays and strings
 
 ### [6-string-interpolation.js](./6-string-interpolation.js)
-Use template literals to form strings. A bit similar to fstring in python. You'll find this behaviour in the return value of the function
+Use template literals to form strings. A bit similar to fstring in python.
+You'll find this behaviour in the return value of the function
+
+### [7-getBudgetObject.js](./7-getBudgetObject.js)
+In ES6 and above, when declaring an object, you can use use just the key
+name if it is the same as the value name.
