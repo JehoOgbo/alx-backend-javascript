@@ -43,3 +43,6 @@ way you get the values stored in the array.
 
 ### [11-createEmployeesObject.js](./11-createEmployeesObject.js)
 A function that creates an object based on the arguments and returns that object
+
+### [12-createReportObject.js](./12-createReportObject.js)
+A function that returns an object containing all employees sorted by department and a method to calculate the number of departments
