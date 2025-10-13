@@ -28,3 +28,7 @@ You'll find this behaviour in the return value of the function
 ### [7-getBudgetObject.js](./7-getBudgetObject.js)
 In ES6 and above, when declaring an object, you can use use just the key
 name if it is the same as the value name.
+
+### [8-getBudgetCurrentYear.js](./8-getBugdetCurrentYear.js)
+In ES6 and above, you can use a semicolon in combination with square brackets []
+to use computed property names on an object.
