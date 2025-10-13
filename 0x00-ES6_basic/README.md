@@ -36,3 +36,7 @@ to use computed property names on an object.
 ### [9-getFullBudget.js](./9-getFullBudget.js)
 In ES6 and above, you can use method shorthand to create methods without the need
 to use the conventional methodName: function() {}. Open the file to see this in action.
+
+### [10-loops.js](./10-loops.js(
+In ES6 and above, you can use for...of operator to loop through an array. In this
+way you get the values stored in the array.
