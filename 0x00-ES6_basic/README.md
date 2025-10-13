@@ -32,3 +32,7 @@ name if it is the same as the value name.
 ### [8-getBudgetCurrentYear.js](./8-getBugdetCurrentYear.js)
 In ES6 and above, you can use a semicolon in combination with square brackets []
 to use computed property names on an object.
+
+### [9-getFullBudget.js](./9-getFullBudget.js)
+In ES6 and above, you can use method shorthand to create methods without the need
+to use the conventional methodName: function() {}. Open the file to see this in action.
