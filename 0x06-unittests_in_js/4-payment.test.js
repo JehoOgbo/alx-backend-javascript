@@ -1,7 +1,7 @@
 const sinon = require('sinon');
 const Utils = require('./utils');
 const expect = require('chai').expect;
-const sendPaymentRequestToApi = require('./3-payment.js');
+const sendPaymentRequestToApi = require('./4-payment.js');
 
 describe('sendPaymentRequestToApi', () => {
   it('sendPaymentRequestToApi should use the calculateNumber method of Utils module', () => {

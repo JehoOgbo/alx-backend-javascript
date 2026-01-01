@@ -1,5 +1,4 @@
-/**
- * calculateNumber - round two numbers and give the sum
+/** calculateNumber - round two numbers and give the sum
  * {param} test - string used to determine type of operation
  * {param} a - number to be used for the operation
  * {param} b - number to be used for operation
