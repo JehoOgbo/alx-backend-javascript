@@ -73,21 +73,21 @@ bob@dylan:~$
   - When type is `SUBTRACT`, round the two numbers, and subtract `b` from `a`.
   - When type is `DIVIDE`, round the two numbers, and divide `a` with `b` - if the rounded value of `b` is equal to 0, return the string `Error`.
 
-- Test cases:
+- **Test cases**:
   - Create a file [1-calcul.test.js](./1-calcul.test.js) that contains test cases of this function.
   - You can assume `a` and `b` are always number.
   - Usage of `describe` will help you to organize your test cases.
 
-- Tips:
+- **Tips**:
   - For the sake of the example, this test suite is slightly extreme and probably not needed.
   - However, remember that your tests should not only verify what a function is supposed to do, but also the edge cases.
 
-- Requirements:
+- **Requirements**:
   - You have to use assert.
   - You should be able to run the test suite using `npm test 1-calcul.test.js`.
   - Every test should pass without any warning.
 
-- Expected output:
+- **Expected output**:
 
 ```
 > const calculateNumber = require("./1-calcul.js");
@@ -108,10 +108,82 @@ bob@dylan:~$
   - Copy the file [1-calcul.js](./1-calcul.js) in a new file [2-calcul_chai.js](./2-calcul_chai.js) (same content, same behavior).
   - Copy the file [1-calcul.test.js](./1-calcul.test.js) in a new file [2-calcul_chai.test.js](./2-calcul_chai.test.js).
   - Rewrite the test suite, using expect from `Chai`.
-- Tips:
+- **Tips**:
   - Remember that test coverage is always difficult to maintain. Using an easier style for your tests will help you.
   - The easier your tests are to read and understand, the more other engineers will be able to fix them when they are modifying your code.
-- Requirements:
+- **Requirements**:
   - You should be able to run the test suite using `npm` test [2-calcul_chai.test.js](./2-calcul_chai.test.js).
   - Every test should pass without any warning.
+
+## Spies
+
+Spies are a useful wrapper that will execute the wrapped function, and log useful information (e.g. was it called, with what arguments). `Sinon` is a library allowing you to create spies.
+- **Let's install `Sinon` with `npm`**:
+  - Create a new file named `utils.js`.
+  - Create a new module named `Utils`.
+  - Create a property named `calculateNumber` and paste your previous code in the function.
+  - Export the `Utils` module.
+- Create a new file named [3-payment.js](./3-payment.js):
+  - Create a new function named `sendPaymentRequestToApi`. The function takes two arguments `totalAmount`, and `totalShipping`. The function calls the `Utils.calculateNumber` function with type `SUM`, `totalAmount` as a, `totalShipping` as `b`, and displays in the console the message `The total is: <result of the sum>`.
+- Create a new file named [3-payment.test.js](./3-payment.test.js) and add a new suite named `sendPaymentRequestToApi`:
+  - By using `sinon.spy`, make sure the math used for `sendPaymentRequestToApi(100, 20)` is the same as `Utils.calculateNumber('SUM', 100, 20)` (validate the usage of the `Utils` function).
+- Requirements:
+  - You should be able to run the test suite using `npm test 3-payment.test.js`.
+  - Every test should pass without any warning.
+  - You should use a spy to complete this exercise.
+- **Tips**:
+  - Remember to always restore a spy after using it in a test, it will prevent you from having weird behaviors.
+  - Spies are really useful and allow you to focus only on what your code is doing and not the downstream APIs or functions.
+  - Remember that integration test is different from unit test. Your unit test should test your code, not the code of a different function.
+
+## Stubs
+
+Stubs are similar to spies. Except that you can provide a different implementation of the function you are wrapping. `Sinon` can be used as well for stubs.
+- Create a new file [4-payment.js](./4-payment.js), and copy the code from [3-payment.js](./3-payment.js) (same content, same behavior).
+- Create a new file [4-payment.test.js](./4-payment.test.js), and copy the code from [3-payment.test.js](./3-payment.js):
+  - Imagine that calling the function `Utils.calculateNumber` is actually calling an API or a very expensive method. You don't necessarily want to do that on every test run.
+  - Stub the function `Utils.calculateNumber` to always return the same number 10.
+  - Verify that the stub is being called with `type = SUM`, `a = 100`, and `b = 20`.
+  - Add a spy to verify that `console.log` is logging the correct message `The total is: 10`.
+- **Requirements**:
+  - You should be able to run the test suite using `npm test 4-payment.test.js`.
+  - Every test should pass without any warning.
+  - You should use a stub to complete this exercise.
+  - Do not forget to restore the spy and the stub.
+- **Tips**:
+  - Using stubs allows you to greatly speed up your test. When executing thousands of tests, saving a few seconds is important.
+  - Using stubs allows you to control specific edge case (e.g a function throwing an error or returning a specific result like a number or a timestamp).
+
+## Hooks
+
+Hooks are useful functions that can be called before executing one or all tests in a suite.
+- Copy the code from [4-payment.js](./4-payment.js) into a new file [5-payment.js](./5-payment.js): (same content/same behavior).
+- Create a new file [5-payment.test.js](./5-payment.test.js):
+  - Inside the same describe, create 2 tests:
+    - The first test will call `sendPaymentRequestToAPI` with 100, and 20:
+      - Verify that the console is logging the string `The total is: 120`.
+      - Verify that the console is only called once.
+    - The second test will call `sendPaymentRequestToAPI` with 10, and 10:
+      - Verify that the console is logging the string `The total is: 20`.
+      - Verify that the console is only called once.
+- **Requirements**:
+  - You should be able to run the test suite using `npm test 5-payment.test.js`.
+  - Every test should pass without any warning.
+  - You should use only one spy to complete this exercise.
+  - You should use a `beforeEach` and an `afterEach` hooks to complete this exercise.
+
+## Async tests with done
+
+Look into how to support async testing, for example when waiting for the answer of an API or from a Promise.
+- Create a new file [6-payment_token.js](./6-payment_token.js): Create a new function named `getPaymentTokenFromAPI`. The function will take an argument called success (boolean).
+  - When success is true, it should return a resolved promise with the object `{data: 'Successful response from the API'}`.
+  - Otherwise, the function is doing nothing.
+- Create a new file [6-payment_token.test.js](./6-payment_token.test.js) and write a test suite named `getPaymentTokenFromAPI`:
+  How to test the result of `getPaymentTokenFromAPI(true)`?
+- **Tips**:
+  - You should be extremely careful when working with async testing. Without calling done properly, your test could be always passing even if what you are actually testing is never executed.
+- **Requirements**:
+  - You should be able to run the test suite using `npm test 6-payment_token.test.js`.
+  - Every test should pass without any warning.
+  - You should use the done callback to execute this test.
 
